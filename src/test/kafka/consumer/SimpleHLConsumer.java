@@ -20,8 +20,8 @@ public class SimpleHLConsumer {
         Properties props = new Properties();
         props.put("zookeeper.connect", zookeeper);
         props.put("group.id", groupId);
-        props.put("zookeeper.session.timeout.ms", "500");
-        props.put("zookeeper.sync.time.ms", "250");
+        props.put("zookeeper.session.timeout.ms", "5000");
+        props.put("zookeeper.sync.time.ms", "2500");
         props.put("auto.commit.interval.ms", "1000");
 
         consumer = Consumer.createJavaConsumerConnector(new ConsumerConfig(props));
@@ -46,8 +46,11 @@ public class SimpleHLConsumer {
     }
 
     public static void main(String[] args) {
-        String topic = args[0];
-        SimpleHLConsumer simpleHLConsumer = new SimpleHLConsumer("localhost:2181", "testgroup", topic);
+//        String topic = args[0];
+        String topic = "topic_henry";
+        String group="console-consumer-6574";
+//        SimpleHLConsumer simpleHLConsumer = new SimpleHLConsumer("localhost:2181", "testgroup", topic);
+        SimpleHLConsumer simpleHLConsumer = new SimpleHLConsumer("192.168.1.232:2181",group, topic);
         simpleHLConsumer.testConsumer();
     }
 
